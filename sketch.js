@@ -1,4 +1,5 @@
 let img
+let score=0
 //let mySound
 var FruitSwitch=1
 var fruitX
@@ -16,6 +17,7 @@ function preload() {
 }
 function setup() {
   imageMode(CENTER)
+  
    mySound = loadSound('help/beep1.wav');
   createCanvas(400, 400);
   background(120)
@@ -29,13 +31,22 @@ function setup() {
 }
 
 function draw() {
-  background(120);
+ if(FruitSwitch!=-1){
+    background(120);
+  print (score)
+ textSize(16)
+  text ('score',25,20)
+   text (score,15,40)
+  
   if (FruitSwitch==1){
- //SPECIAL EVENT HAS OCCURRED 
+ //SPECIAL EVENT HAS OCCURRED
+    
     [fruitX,fruitY]=drawfruit(1)
    FruitSwitch=0
+  score=score+10
   mySound.play()
   incrementLength = 1
+ 
   snakeLength+=incrementLength;
     
   for(i = 1;i<=incrementLength;i++){
@@ -113,7 +124,7 @@ image(img,fruitX,fruitY,50,50)
   
   mouthX = xPosArray[snakeLength]
   mouthY = yPosArray[snakeLength]
-  
+ 
   fill(0)
   if (snakeDirection =='up' || snakeDirection =='Down'){
   rect(mouthX,mouthY-5,5,30)}
@@ -131,9 +142,25 @@ image(img,fruitX,fruitY,50,50)
   
   if (FruitSwitch==1){
   fill(255,0,0)
-  for (i=0;i<xPosArray.length;i++){
+  for (i=0;i<xPosArray.length;i=i+1){
     circle(xPosArray[i],yPosArray[i],10)
+    
   }
   fill(255)
   }
+if(score>10){
+  for(let i=0;i<xPosArray.length-2;i=i+1){
+   if(xPosArray[i]==mouthX && yPosArray[i]==mouthY){
+FruitSwitch=-1
+  }
+  }
+  }
+}
+if (FruitSwitch==-1){
+background(0,0,0)
+text('GAMEOVER',200,200)
+
+}
+textAlign(CENTER);
+  textSize(70)
 }
