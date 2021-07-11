@@ -15,5 +15,6 @@ function touch(mouthX,mouthY,fruitX,fruitY){
     FruitSwitch = 1
     Eating = false
     return FruitSwitch 
+ 
   }  
 }
